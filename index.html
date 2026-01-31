@@ -63,7 +63,7 @@
             max-width: 1200px;
         }
 
-        /* --- แทนที่ Logo ด้วย Text --- */
+        /* --- Brand Text Logo --- */
         .brand-logo-text {
             font-family: 'Orbitron', sans-serif;
             font-size: 6rem;
@@ -90,51 +90,60 @@
             display: inline-block;
         }
 
-        /* --- Plate Section --- */
+        /* --- Updated Changretta Plate with 4 Corners --- */
         .changretta-plate {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border);
-            padding: 45px 110px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05); /* ขอบเบาๆ */
+            padding: 50px 100px;
             text-align: center;
             backdrop-filter: blur(12px);
-            clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             position: relative;
+            width: auto;
+            min-width: 450px;
         }
 
         .changretta-plate:hover {
             background: rgba(255, 255, 255, 0.08);
-            border-color: var(--primary);
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.15);
-            transform: translateY(-8px) scale(1.02);
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
         }
 
         .plate-main-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             font-weight: 700;
-            letter-spacing: 12px;
+            letter-spacing: 15px;
             color: var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-shadow: 0 0 15px rgba(255,255,255,0.5);
         }
 
         .real-member-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 8px;
+            font-size: 0.85rem;
+            letter-spacing: 10px;
             color: var(--secondary);
             text-transform: uppercase;
         }
 
+        /* ขอบกรอบ 4 ด้าน */
         .corner {
             position: absolute;
-            width: 15px; height: 15px;
+            width: 25px;
+            height: 25px;
             border: 2px solid var(--primary);
+            filter: drop-shadow(0 0 5px var(--primary));
         }
-        .top-l { top: 0; left: 5%; border-right: none; border-bottom: none; }
-        .top-r { top: 0; right: 5%; border-left: none; border-bottom: none; }
+        /* บนซ้าย */
+        .c-tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        /* บนขวา */
+        .c-tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+        /* ล่างซ้าย */
+        .c-bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+        /* ล่างขวา */
+        .c-br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
 
         /* --- Music Player --- */
         #music-container {
@@ -172,10 +181,9 @@
             transition: 0.3s;
         }
 
-        /* --- Animations --- */
         @keyframes floating {
-            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); }
-            50% { transform: translateY(-15px) scale(1.02); filter: brightness(1.2); }
+            0%, 100% { transform: translateY(0); filter: brightness(1); }
+            50% { transform: translateY(-10px); filter: brightness(1.2); }
         }
 
         .footer {
@@ -187,9 +195,9 @@
         }
 
         @media (max-width: 768px) {
-            .brand-logo-text { font-size: 2.5rem; letter-spacing: 10px; }
-            .changretta-plate { padding: 30px 40px; }
-            .plate-main-text { font-size: 1.4rem; letter-spacing: 6px; }
+            .brand-logo-text { font-size: 2.8rem; letter-spacing: 8px; }
+            .changretta-plate { padding: 40px 30px; min-width: 90vw; }
+            .plate-main-text { font-size: 1.6rem; letter-spacing: 8px; }
         }
     </style>
 </head>
@@ -205,8 +213,11 @@
         <div class="status-bar">AUTHENTIC // BLACK_LABEL_2K26</div>
 
         <div class="changretta-plate" onclick="window.open('http://member.dedkordongg.xyz/', '_blank')">
-            <div class="corner top-l"></div>
-            <div class="corner top-r"></div>
+            <div class="corner c-tl"></div>
+            <div class="corner c-tr"></div>
+            <div class="corner c-bl"></div>
+            <div class="corner c-br"></div>
+            
             <div class="plate-main-text">CHANGRETTA</div>
             <div class="real-member-tag">REAL MEMBER</div>
         </div>
