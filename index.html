@@ -333,4 +333,339 @@
         document.body.addEventListener('click', () => { if(player) player.playVideo(); }, { once: true });
     </script>
 </body>
+</html><!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANGRETTA | OFFICIAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: #888888;
+            --bg-dark: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.2);
+            --discord: #5865F2;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+
+        body {
+            background: var(--bg-dark);
+            color: #fff;
+            height: 100vh;
+            width: 100vw;
+            font-family: 'Rajdhani', sans-serif;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://img2.pic.in.th/475638765_916266083879572_6694404597216444166_n.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        /* --- Header Section: White Text with Light Grey Shimmer --- */
+        .top-header {
+            position: absolute;
+            top: 50px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+            line-height: 0.8;
+        }
+
+        .wf-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 6.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            user-select: none;
+            display: block;
+            position: relative;
+            /* ตัวอักษรสีขาว (#fff) แสงวิ่งสีเทาสว่าง (#bbbbbb) */
+            background: linear-gradient(90deg, #ffffff 0%, #ffffff 35%, #bbbbbb 50%, #ffffff 65%, #ffffff 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: greyShimmerRun 2.5s linear infinite;
+            /* เรืองแสงสีขาวรอบตัวอักษรให้สว่างจ้า */
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)) 
+                    drop-shadow(0 0 20px rgba(255, 255, 255, 0.4))
+                    drop-shadow(0 0 40px rgba(255, 255, 255, 0.2));
+        }
+
+        @keyframes greyShimmerRun {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
+        .sub-brand-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 12px;
+            color: var(--secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 8px 30px;
+            margin-top: 30px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .main-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 60px; 
+        }
+
+        /* --- Discord Button --- */
+        .discord-wrapper {
+            position: fixed;
+            bottom: 110px;
+            right: 40px;
+            z-index: 100;
+        }
+
+        .discord-btn {
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .discord-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+            border-color: #fff;
+        }
+
+        .status-dot {
+            width: 10px; height: 10px;
+            background: #23a55a;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #23a55a;
+        }
+
+        .discord-icon svg { width: 18px; fill: #5865F2; }
+        .discord-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left;}
+        .discord-label { font-size: 0.6rem; color: #aaa; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
+        .discord-join { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; }
+
+        /* --- Compact Plate --- */
+        .changretta-plate {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 30px 60px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            transition: 0.4s;
+            cursor: pointer;
+            position: relative;
+            min-width: 320px;
+        }
+
+        .changretta-plate:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .plate-main-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 10px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .real-member-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 6px;
+            color: var(--secondary);
+            text-transform: uppercase;
+        }
+
+        .corner {
+            position: absolute;
+            width: 18px; height: 18px;
+            border: 2px solid var(--primary);
+        }
+        .c-tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .c-tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+        .c-bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+        .c-br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+        /* --- Music Player Bar --- */
+        #music-container {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 100;
+        }
+
+        .player-bar {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .album-art { width: 40px; height: 40px; filter: grayscale(100%); border: 1px solid var(--secondary); }
+        .song-info h4 { font-size: 0.8rem; color: #fff; text-align: left;}
+        .song-info p { font-size: 0.55rem; color: var(--secondary); text-align: left;}
+
+        .btn-toggle {
+            background: #fff;
+            color: #000;
+            border: none;
+            width: 30px; height: 30px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            position: absolute;
+            bottom: 25px;
+            font-size: 0.75rem;
+            color: var(--secondary);
+            text-transform: none;
+            letter-spacing: 1px;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            text-shadow: 0 0 10px #fff;
+        }
+
+        @media (max-width: 768px) {
+            .wf-text { font-size: 3rem; }
+            .discord-wrapper { bottom: 110px; right: 20px; }
+            #music-container { right: 20px; }
+            .main-container { top: 60%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+    <div class="scanlines"></div>
+
+    <div class="top-header">
+        <span class="wf-text">WELCOME TO</span>
+        <span class="wf-text">CHANGRETTA</span>
+        <div class="sub-brand-text">ALLWAYTOSTAR DIFFERENCE</div>
+    </div>
+
+    <div class="main-container">
+        <div class="changretta-plate" onclick="window.open('http://member.dedkordongg.xyz/', '_blank')">
+            <div class="corner c-tl"></div>
+            <div class="corner c-tr"></div>
+            <div class="corner c-bl"></div>
+            <div class="corner c-br"></div>
+            
+            <div class="plate-main-text">CHANGRETTA</div>
+            <div class="real-member-tag">REAL MEMBER</div>
+        </div>
+    </div>
+
+    <div class="discord-wrapper">
+        <a href="https://discord.gg/oneless" target="_blank" class="discord-btn">
+            <div class="status-dot"></div>
+            <div class="discord-icon">
+                <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.22,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.51,11.1,105.33,105.33,0,0,0,32.19-16.14h0C130.46,50.45,125.13,26.79,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+            </div>
+            <div class="discord-text">
+                <span class="discord-label">ONELESS PROJECT</span>
+                <span class="discord-join">Join Discord</span>
+            </div>
+        </a>
+    </div>
+
+    <div id="music-container">
+        <div class="player-bar">
+            <img src="https://i.ytimg.com/vi/xy3AcmW0lrQ/maxresdefault.jpg" class="album-art" alt="Art">
+            <div class="song-info">
+                <h4>End of Beginning</h4>
+                <p>Djo // AUDIO_SYSTEM</p>
+            </div>
+            <button class="btn-toggle" onclick="togglePlayPause()" id="playBtn">||</button>
+        </div>
+    </div>
+
+    <div id="yt-player" style="display:none;"></div>
+
+    <footer class="footer">
+        Designed by <a href="https://discord.gg/oneless" target="_blank">Oneless</a> | 
+        Powered by <a href="https://www.facebook.com/tsumaki.tsunaji.342" target="_blank">OSHI</a> | 
+        © 2026
+    </footer>
+
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                height: '0', width: '0',
+                videoId: 'xy3AcmW0lrQ',
+                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'xy3AcmW0lrQ' },
+                events: { 'onReady': (e) => { e.target.setVolume(40); }}
+            });
+        }
+
+        function togglePlayPause() {
+            const btn = document.getElementById('playBtn');
+            if (player.getPlayerState() === 1) {
+                player.pauseVideo();
+                btn.innerText = "▶";
+            } else {
+                player.playVideo();
+                btn.innerText = "||";
+            }
+        }
+        document.body.addEventListener('click', () => { if(player) player.playVideo(); }, { once: true });
+    </script>
+</body>
 </html>
