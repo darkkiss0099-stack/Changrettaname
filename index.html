@@ -63,58 +63,42 @@
             max-width: 1200px;
         }
 
-        /* --- Header --- */
-        .header-section {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .glitch-title {
+        /* --- แทนที่ Logo ด้วย Text --- */
+        .brand-logo-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 5.5rem;
+            font-size: 6rem;
             font-weight: 900;
-            letter-spacing: 25px;
+            letter-spacing: 20px;
             text-transform: uppercase;
             color: var(--primary);
-            text-shadow: 0 0 25px rgba(255,255,255,0.3);
-            animation: breathe 4s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255,255,255,0.4), 0 0 60px rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+            animation: floating 4s ease-in-out infinite;
+            user-select: none;
+            text-align: center;
         }
 
         .status-bar {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             letter-spacing: 12px;
             color: var(--secondary);
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
             padding: 8px 30px;
-            margin-top: 15px;
+            margin-bottom: 60px;
             display: inline-block;
         }
 
-        /* --- Logo Monochrome --- */
-        .logo-wrap {
-            position: relative;
-            margin: 40px 0;
-            filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.15));
-        }
-
-        .main-logo {
-            width: 240px;
-            filter: grayscale(100%) brightness(1.2);
-            animation: rotation3D 15s linear infinite;
-            transform-style: preserve-3d;
-        }
-
-        /* --- New Changretta Sign --- */
+        /* --- Plate Section --- */
         .changretta-plate {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
-            padding: 40px 100px;
+            padding: 45px 110px;
             text-align: center;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
-            transition: 0.5s;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             position: relative;
         }
@@ -122,24 +106,24 @@
         .changretta-plate:hover {
             background: rgba(255, 255, 255, 0.08);
             border-color: var(--primary);
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.15);
+            transform: translateY(-8px) scale(1.02);
         }
 
-        .changretta-name {
+        .plate-main-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 700;
-            letter-spacing: 15px;
+            letter-spacing: 12px;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             text-shadow: 0 0 15px rgba(255,255,255,0.5);
         }
 
         .real-member-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 10px;
+            font-size: 0.8rem;
+            letter-spacing: 8px;
             color: var(--secondary);
             text-transform: uppercase;
         }
@@ -188,14 +172,10 @@
             transition: 0.3s;
         }
 
-        @keyframes rotation3D {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
-        }
-
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(0.98); opacity: 0.8; }
+        /* --- Animations --- */
+        @keyframes floating {
+            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); }
+            50% { transform: translateY(-15px) scale(1.02); filter: brightness(1.2); }
         }
 
         .footer {
@@ -207,9 +187,9 @@
         }
 
         @media (max-width: 768px) {
-            .glitch-title { font-size: 2.5rem; letter-spacing: 10px; }
+            .brand-logo-text { font-size: 2.5rem; letter-spacing: 10px; }
             .changretta-plate { padding: 30px 40px; }
-            .changretta-name { font-size: 1.5rem; letter-spacing: 8px; }
+            .plate-main-text { font-size: 1.4rem; letter-spacing: 6px; }
         }
     </style>
 </head>
@@ -220,19 +200,14 @@
     <canvas id="rainCanvas"></canvas>
 
     <div class="main-container">
-        <header class="header-section">
-            <h1 class="glitch-title">CHANGRETTA</h1>
-            <div class="status-bar">BLACK_LABEL // 2K26</div>
-        </header>
-
-        <div class="logo-wrap">
-            <img src="https://img2.pic.in.th/Untitled-2abc1d067d1c658d9.png" alt="Core" class="main-logo">
-        </div>
+        <h1 class="brand-logo-text">CHANGRETTA</h1>
+        
+        <div class="status-bar">AUTHENTIC // BLACK_LABEL_2K26</div>
 
         <div class="changretta-plate" onclick="window.open('http://member.dedkordongg.xyz/', '_blank')">
             <div class="corner top-l"></div>
             <div class="corner top-r"></div>
-            <div class="changretta-name">CHANGRETTA</div>
+            <div class="plate-main-text">CHANGRETTA</div>
             <div class="real-member-tag">REAL MEMBER</div>
         </div>
     </div>
@@ -272,7 +247,7 @@
 
         function drawRain() {
             ctx.clearRect(0, 0, width, height);
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
             ctx.lineWidth = 0.8;
             drops.forEach(d => {
                 ctx.beginPath();
