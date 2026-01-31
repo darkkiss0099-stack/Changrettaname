@@ -39,9 +39,7 @@
             z-index: -1;
         }
 
-        /* ลบ Scanlines และ Rain Canvas ออกจากส่วนการแสดงผล */
-
-        /* --- Header Section --- */
+        /* --- Header Section: White Text with Light Grey Shimmer --- */
         .top-header {
             position: absolute;
             top: 50px;
@@ -60,18 +58,22 @@
             user-select: none;
             display: block;
             position: relative;
-            background: linear-gradient(90deg, #777 0%, #777 35%, #fff 50%, #777 65%, #777 100%);
+            /* ตัวอักษรสีขาว (#fff) แสงวิ่งสีเทาสว่าง (#bbbbbb) */
+            background: linear-gradient(90deg, #ffffff 0%, #ffffff 35%, #bbbbbb 50%, #ffffff 65%, #ffffff 100%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            animation: whiteGlowRun 2.5s linear infinite;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+            animation: greyShimmerRun 2.5s linear infinite;
+            /* เรืองแสงสีขาวรอบตัวอักษรให้สว่างจ้า */
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)) 
+                    drop-shadow(0 0 20px rgba(255, 255, 255, 0.4))
+                    drop-shadow(0 0 40px rgba(255, 255, 255, 0.2));
         }
 
-        @keyframes whiteGlowRun {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
+        @keyframes greyShimmerRun {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
         }
 
         .sub-brand-text {
@@ -125,15 +127,16 @@
         }
 
         .discord-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             transform: scale(1.05);
+            border-color: #fff;
         }
 
         .status-dot {
             width: 10px; height: 10px;
             background: #23a55a;
             border-radius: 50%;
-            box-shadow: 0 0 8px #23a55a;
+            box-shadow: 0 0 10px #23a55a;
         }
 
         .discord-icon svg { width: 18px; fill: #5865F2; }
@@ -197,7 +200,7 @@
         .player-bar {
             display: flex;
             align-items: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             border: 1px solid var(--border);
             padding: 10px 20px;
             gap: 15px;
@@ -205,8 +208,8 @@
         }
 
         .album-art { width: 40px; height: 40px; filter: grayscale(100%); border: 1px solid var(--secondary); }
-        .song-info h4 { font-size: 0.8rem; color: #fff; text-align: left; }
-        .song-info p { font-size: 0.55rem; color: var(--secondary); text-align: left; }
+        .song-info h4 { font-size: 0.8rem; color: #fff; text-align: left;}
+        .song-info p { font-size: 0.55rem; color: var(--secondary); text-align: left;}
 
         .btn-toggle {
             background: #fff;
@@ -249,6 +252,8 @@
 <body>
 
     <div class="bg-overlay"></div>
+    <div class="scanlines"></div>
+
     <div class="top-header">
         <span class="wf-text">WELCOME TO</span>
         <span class="wf-text">CHANGRETTA</span>
@@ -300,8 +305,6 @@
     </footer>
 
     <script>
-        // ลบฟังก์ชันเกี่ยวกับฝน (initRain, drawRain) ออกเพื่อให้คลีน
-
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
