@@ -39,21 +39,9 @@
             z-index: -1;
         }
 
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, transparent 50%, rgba(255, 255, 255, 0.02) 50%);
-            background-size: 100% 4px;
-            z-index: 10;
-            pointer-events: none;
-        }
+        /* ลบ Scanlines และ Rain Canvas ออกจากส่วนการแสดงผล */
 
-        #rainCanvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; pointer-events: none; opacity: 0.25;
-        }
-
-        /* --- Header Section: Winterfell Awake Style with Bright Shimmer --- */
+        /* --- Header Section --- */
         .top-header {
             position: absolute;
             top: 50px;
@@ -72,20 +60,18 @@
             user-select: none;
             display: block;
             position: relative;
-            /* พื้นตัวอักษรสีขาว แสงวิ่งสีเทาสว่าง */
-            background: linear-gradient(90deg, #ffffff 0%, #ffffff 35%, #bbbbbb 50%, #ffffff 65%, #ffffff 100%);
+            background: linear-gradient(90deg, #777 0%, #777 35%, #fff 50%, #777 65%, #777 100%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            animation: greyShimmerRun 2.5s linear infinite;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)) 
-                    drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+            animation: whiteGlowRun 2.5s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
         }
 
-        @keyframes greyShimmerRun {
-            0% { background-position: 200% center; }
-            100% { background-position: -200% center; }
+        @keyframes whiteGlowRun {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
 
         .sub-brand-text {
@@ -110,12 +96,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             width: 100%;
             max-width: 1200px;
-            margin-top: 60px;
+            margin-top: 60px; 
         }
 
-        /* --- Discord Button above Music Player --- */
+        /* --- Discord Button --- */
         .discord-wrapper {
             position: fixed;
             bottom: 110px;
@@ -138,16 +125,15 @@
         }
 
         .discord-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             transform: scale(1.05);
-            border-color: #fff;
         }
 
         .status-dot {
             width: 10px; height: 10px;
             background: #23a55a;
             border-radius: 50%;
-            box-shadow: 0 0 10px #23a55a;
+            box-shadow: 0 0 8px #23a55a;
         }
 
         .discord-icon svg { width: 18px; fill: #5865F2; }
@@ -211,7 +197,7 @@
         .player-bar {
             display: flex;
             align-items: center;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.8);
             border: 1px solid var(--border);
             padding: 10px 20px;
             gap: 15px;
@@ -219,8 +205,8 @@
         }
 
         .album-art { width: 40px; height: 40px; filter: grayscale(100%); border: 1px solid var(--secondary); }
-        .song-info h4 { font-size: 0.8rem; color: #fff; text-align: left;}
-        .song-info p { font-size: 0.55rem; color: var(--secondary); text-align: left;}
+        .song-info h4 { font-size: 0.8rem; color: #fff; text-align: left; }
+        .song-info p { font-size: 0.55rem; color: var(--secondary); text-align: left; }
 
         .btn-toggle {
             background: #fff;
@@ -231,7 +217,7 @@
             cursor: pointer;
         }
 
-        /* --- Updated Footer --- */
+        /* --- Footer --- */
         .footer {
             position: absolute;
             bottom: 25px;
@@ -263,9 +249,6 @@
 <body>
 
     <div class="bg-overlay"></div>
-    <div class="scanlines"></div>
-    <canvas id="rainCanvas"></canvas>
-
     <div class="top-header">
         <span class="wf-text">WELCOME TO</span>
         <span class="wf-text">CHANGRETTA</span>
@@ -317,37 +300,7 @@
     </footer>
 
     <script>
-        const canvas = document.getElementById('rainCanvas');
-        const ctx = canvas.getContext('2d');
-        let width, height, drops = [];
-
-        function initRain() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            drops = Array(100).fill().map(() => ({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                len: Math.random() * 15 + 5,
-                speed: Math.random() * 10 + 4
-            }));
-        }
-
-        function drawRain() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-            ctx.lineWidth = 0.7;
-            drops.forEach(d => {
-                ctx.beginPath();
-                ctx.moveTo(d.x, d.y);
-                ctx.lineTo(d.x, d.y + d.len);
-                ctx.stroke();
-                d.y += d.speed;
-                if (d.y > height) { d.y = -d.len; d.x = Math.random() * width; }
-            });
-            requestAnimationFrame(drawRain);
-        }
-        window.addEventListener('resize', initRain);
-        initRain(); drawRain();
+        // ลบฟังก์ชันเกี่ยวกับฝน (initRain, drawRain) ออกเพื่อให้คลีน
 
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
