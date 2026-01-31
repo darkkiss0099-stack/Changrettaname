@@ -53,7 +53,7 @@
             z-index: 1; pointer-events: none; opacity: 0.25;
         }
 
-        /* --- Header Section: ปรับความสว่างสูงสุด --- */
+        /* --- Header Section: Fixed Center with Grey Base & White Shimmer --- */
         .top-header {
             position: absolute;
             top: 50px;
@@ -72,18 +72,14 @@
             user-select: none;
             display: block;
             position: relative;
-            /* แสงวิ่งสีขาวเข้มข้นตัดกับพื้นสีดำ */
-            background: linear-gradient(90deg, #000 0%, #fff 45%, #fff 55%, #000 100%);
+            /* พื้นตัวอักษรสีเทา (#777) แสงวิ่งสีขาว (#fff) */
+            background: linear-gradient(90deg, #777 0%, #777 35%, #fff 50%, #777 65%, #777 100%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            animation: whiteGlowRun 2s linear infinite;
-            /* เงาสว่างจ้าซ้อน 4 ชั้นเพื่อให้ดูเรืองแสงรุนแรง */
-            filter: drop-shadow(0 0 10px #fff) 
-                    drop-shadow(0 0 25px rgba(255, 255, 255, 0.9))
-                    drop-shadow(0 0 45px rgba(255, 255, 255, 0.6))
-                    drop-shadow(0 0 70px rgba(255, 255, 255, 0.3));
+            animation: whiteGlowRun 2.5s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
         }
 
         @keyframes whiteGlowRun {
@@ -104,18 +100,20 @@
             text-transform: uppercase;
         }
 
+        /* จัดตัวป้ายให้อยู่กึ่งกลางหน้าจอ */
         .main-container {
             position: relative;
             z-index: 5;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             width: 100%;
             max-width: 1200px;
-            margin-top: 220px;
+            margin-top: 150px; 
         }
 
-        /* --- Discord Button --- */
+        /* --- Discord Button above Music Player --- */
         .discord-wrapper {
             position: fixed;
             bottom: 110px;
@@ -138,19 +136,24 @@
         }
 
         .discord-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             transform: scale(1.05);
-            border-color: #fff;
         }
 
         .status-dot {
             width: 10px; height: 10px;
             background: #23a55a;
             border-radius: 50%;
-            box-shadow: 0 0 10px #23a55a;
+            box-shadow: 0 0 8px #23a55a;
         }
 
         .discord-icon svg { width: 18px; fill: #5865F2; }
+
+        .discord-text { display: flex; flex-direction: column; line-height: 1.1; }
+
+        .discord-label { font-size: 0.6rem; color: #aaa; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
+
+        .discord-join { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; }
 
         /* --- Compact Plate --- */
         .changretta-plate {
@@ -208,7 +211,7 @@
         .player-bar {
             display: flex;
             align-items: center;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.8);
             border: 1px solid var(--border);
             padding: 10px 20px;
             gap: 15px;
