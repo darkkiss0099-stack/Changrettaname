@@ -32,7 +32,6 @@
         .bg-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* แก้พื้นหลังเป็นรูปภาพใหม่ตามที่ระบุ */
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
                         url('https://img2.pic.in.th/475638765_916266083879572_6694404597216444166_n.jpg');
             background-size: cover;
@@ -54,6 +53,39 @@
             z-index: 1; pointer-events: none; opacity: 0.25;
         }
 
+        /* --- Header Section (Top Center) --- */
+        .top-header {
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .brand-logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            color: rgba(255, 255, 255, 0.1); /* สีพื้นจางๆ */
+            background: linear-gradient(to right, #fff 20%, #888 40%, #fff 60%, #fff 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            /* เอฟเฟกต์แสงวิ่งรอบตัวอักษร */
+            animation: shine 4s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            user-select: none;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
         .main-container {
             position: relative;
             z-index: 5;
@@ -64,20 +96,14 @@
             max-width: 1200px;
         }
 
-        .brand-logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 5rem;
-            font-weight: 900;
-            letter-spacing: 15px;
-            text-transform: uppercase;
-            color: var(--primary);
-            text-shadow: 0 0 30px rgba(255,255,255,0.4);
-            margin-bottom: 10px;
-            animation: floating 4s ease-in-out infinite;
-            user-select: none;
+        /* --- Discord Button (Moved to bottom right area) --- */
+        .discord-wrapper {
+            position: fixed;
+            bottom: 110px; /* วางไว้เหนือ Music Player */
+            right: 40px;
+            z-index: 100;
         }
 
-        /* --- Discord Button Design --- */
         .discord-btn {
             background: rgba(0, 0, 0, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -89,30 +115,21 @@
             text-decoration: none;
             color: white;
             transition: 0.3s;
-            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
         }
 
         .discord-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .status-dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background: #23a55a;
             border-radius: 50%;
-            box-shadow: 0 0 10px #23a55a;
-        }
-
-        .discord-icon {
-            width: 32px;
-            height: 32px;
-            background: #313338;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 0 8px #23a55a;
         }
 
         .discord-icon svg {
@@ -123,22 +140,21 @@
         .discord-text {
             display: flex;
             flex-direction: column;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .discord-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #aaa;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             font-weight: bold;
         }
 
         .discord-join {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
-            letter-spacing: 1px;
         }
 
         /* --- Compact Plate --- */
@@ -198,10 +214,11 @@
         .player-bar {
             display: flex;
             align-items: center;
-            background: #000;
+            background: rgba(0, 0, 0, 0.8);
             border: 1px solid var(--border);
             padding: 10px 20px;
             gap: 15px;
+            backdrop-filter: blur(10px);
         }
 
         .album-art {
@@ -222,17 +239,18 @@
             cursor: pointer;
         }
 
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
         .footer {
             position: absolute;
             bottom: 25px;
             font-size: 0.55rem;
             letter-spacing: 5px;
             color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .brand-logo-text { font-size: 2.5rem; letter-spacing: 8px; }
+            .discord-wrapper { bottom: 110px; right: 20px; }
+            #music-container { right: 20px; }
         }
     </style>
 </head>
@@ -242,9 +260,23 @@
     <div class="scanlines"></div>
     <canvas id="rainCanvas"></canvas>
 
-    <div class="main-container">
+    <div class="top-header">
         <h1 class="brand-logo-text">CHANGRETTA</h1>
-        
+    </div>
+
+    <div class="main-container">
+        <div class="changretta-plate" onclick="window.open('http://member.dedkordongg.xyz/', '_blank')">
+            <div class="corner c-tl"></div>
+            <div class="corner c-tr"></div>
+            <div class="corner c-bl"></div>
+            <div class="corner c-br"></div>
+            
+            <div class="plate-main-text">CHANGRETTA</div>
+            <div class="real-member-tag">REAL MEMBER</div>
+        </div>
+    </div>
+
+    <div class="discord-wrapper">
         <a href="https://discord.gg/oneless" target="_blank" class="discord-btn">
             <div class="status-dot"></div>
             <div class="discord-icon">
@@ -255,16 +287,6 @@
                 <span class="discord-join">Join Discord</span>
             </div>
         </a>
-
-        <div class="changretta-plate" onclick="window.open('http://member.dedkordongg.xyz/', '_blank')">
-            <div class="corner c-tl"></div>
-            <div class="corner c-tr"></div>
-            <div class="corner c-bl"></div>
-            <div class="corner c-br"></div>
-            
-            <div class="plate-main-text">CHANGRETTA</div>
-            <div class="real-member-tag">REAL MEMBER</div>
-        </div>
     </div>
 
     <div id="music-container">
