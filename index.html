@@ -13,9 +13,6 @@
             --glass: rgba(255, 255, 255, 0.05);
             --border: rgba(255, 255, 255, 0.2);
             --discord: #5865F2;
-            /* สีสำหรับข้อความสไตล์ Winterfell Awake */
-            --wf-top: #6244f0; /* สีม่วงน้ำเงิน */
-            --wf-bottom: #e060a0; /* สีชมพูแดง */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
@@ -56,34 +53,38 @@
             z-index: 1; pointer-events: none; opacity: 0.25;
         }
 
-        /* --- Header Section Style: Winterfell Awake --- */
+        /* --- Header Section Style: Winterfell Awake with White Glow Run --- */
         .top-header {
             position: absolute;
             top: 50px;
             width: 100%;
             text-align: center;
             z-index: 10;
-            line-height: 0.85;
+            line-height: 0.8;
         }
 
         .wf-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 6rem;
+            font-size: 6.5rem;
             font-weight: 900;
             letter-spacing: -2px;
             text-transform: uppercase;
             user-select: none;
             display: block;
+            position: relative;
+            /* เอฟเฟกต์แสงวิ่งสีขาว */
+            background: linear-gradient(90deg, #555, #fff, #555);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: whiteGlowRun 3s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
         }
 
-        .wf-top {
-            color: var(--wf-top);
-            text-shadow: 0 0 20px rgba(98, 68, 240, 0.4);
-        }
-
-        .wf-bottom {
-            color: var(--wf-bottom);
-            text-shadow: 0 0 20px rgba(224, 96, 160, 0.4);
+        @keyframes whiteGlowRun {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
 
         .sub-brand-text {
@@ -94,7 +95,7 @@
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
             padding: 8px 30px;
-            margin-top: 20px;
+            margin-top: 30px;
             display: inline-block;
             text-transform: uppercase;
         }
@@ -107,10 +108,10 @@
             align-items: center;
             width: 100%;
             max-width: 1200px;
-            margin-top: 180px; /* ขยับลงมาไม่ให้บังหัวข้อใหญ่ */
+            margin-top: 220px;
         }
 
-        /* --- Discord Button --- */
+        /* --- Discord Button above Music Bar --- */
         .discord-wrapper {
             position: fixed;
             bottom: 110px;
@@ -138,17 +139,19 @@
         }
 
         .status-dot {
-            width: 10px;
-            height: 10px;
+            width: 10px; height: 10px;
             background: #23a55a;
             border-radius: 50%;
             box-shadow: 0 0 8px #23a55a;
         }
 
-        .discord-icon svg {
-            width: 18px;
-            fill: #5865F2;
-        }
+        .discord-icon svg { width: 18px; fill: #5865F2; }
+
+        .discord-text { display: flex; flex-direction: column; line-height: 1.1; }
+
+        .discord-label { font-size: 0.6rem; color: #aaa; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
+
+        .discord-join { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; }
 
         /* --- Compact Plate --- */
         .changretta-plate {
@@ -187,8 +190,7 @@
 
         .corner {
             position: absolute;
-            width: 18px;
-            height: 18px;
+            width: 18px; height: 18px;
             border: 2px solid var(--primary);
         }
         .c-tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
@@ -214,11 +216,7 @@
             backdrop-filter: blur(10px);
         }
 
-        .album-art {
-            width: 40px; height: 40px;
-            filter: grayscale(100%);
-            border: 1px solid var(--secondary);
-        }
+        .album-art { width: 40px; height: 40px; filter: grayscale(100%); border: 1px solid var(--secondary); }
 
         .song-info h4 { font-size: 0.8rem; color: #fff; }
         .song-info p { font-size: 0.55rem; color: var(--secondary); }
@@ -241,10 +239,10 @@
         }
 
         @media (max-width: 768px) {
-            .wf-text { font-size: 2.8rem; }
+            .wf-text { font-size: 3rem; }
             .discord-wrapper { bottom: 110px; right: 20px; }
             #music-container { right: 20px; }
-            .main-container { margin-top: 100px; }
+            .main-container { margin-top: 120px; }
         }
     </style>
 </head>
@@ -255,8 +253,8 @@
     <canvas id="rainCanvas"></canvas>
 
     <div class="top-header">
-        <span class="wf-text wf-top">WELCOME TO</span>
-        <span class="wf-text wf-bottom">CHANGRETTA</span>
+        <span class="wf-text">WELCOME TO</span>
+        <span class="wf-text">CHANGRETTA</span>
         <div class="sub-brand-text">ALLWAYTOSTAR DIFFERENCE</div>
     </div>
 
@@ -279,8 +277,8 @@
                 <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.22,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.51,11.1,105.33,105.33,0,0,0,32.19-16.14h0C130.46,50.45,125.13,26.79,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
             </div>
             <div class="discord-text">
-                <span class="discord-label" style="font-size: 0.6rem; color: #aaa; letter-spacing: 1px; text-transform: uppercase; font-weight: bold;">ONELESS PROJECT</span>
-                <span class="discord-join" style="font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700;">Join Discord</span>
+                <span class="discord-label">ONELESS PROJECT</span>
+                <span class="discord-join">Join Discord</span>
             </div>
         </a>
     </div>
