@@ -70,16 +70,29 @@
             text-transform: uppercase;
             position: relative;
             display: inline-block;
-            color: rgba(255, 255, 255, 0.1); /* สีพื้นจางๆ */
             background: linear-gradient(to right, #fff 20%, #888 40%, #fff 60%, #fff 80%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            /* เอฟเฟกต์แสงวิ่งรอบตัวอักษร */
             animation: shine 4s linear infinite;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
             user-select: none;
+        }
+
+        /* ข้อความใต้ CHANGRETTA */
+        .sub-brand-text {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 12px;
+            color: var(--secondary);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 8px 30px;
+            margin-top: 10px;
+            display: inline-block;
+            text-transform: uppercase;
         }
 
         @keyframes shine {
@@ -96,10 +109,10 @@
             max-width: 1200px;
         }
 
-        /* --- Discord Button (Moved to bottom right area) --- */
+        /* --- Discord Button (Above Music Bar) --- */
         .discord-wrapper {
             position: fixed;
-            bottom: 110px; /* วางไว้เหนือ Music Player */
+            bottom: 110px;
             right: 40px;
             z-index: 100;
         }
@@ -249,6 +262,7 @@
 
         @media (max-width: 768px) {
             .brand-logo-text { font-size: 2.5rem; letter-spacing: 8px; }
+            .sub-brand-text { font-size: 0.5rem; letter-spacing: 6px; padding: 6px 15px; }
             .discord-wrapper { bottom: 110px; right: 20px; }
             #music-container { right: 20px; }
         }
@@ -262,6 +276,8 @@
 
     <div class="top-header">
         <h1 class="brand-logo-text">CHANGRETTA</h1>
+        <br>
+        <div class="sub-brand-text">ALLWAYTOSTAR DIFFERENCE</div>
     </div>
 
     <div class="main-container">
