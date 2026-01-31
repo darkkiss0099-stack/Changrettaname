@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -67,7 +66,7 @@
         /* --- Brand Text Logo --- */
         .brand-logo-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 5rem; /* ลดขนาดลงจาก 6rem */
+            font-size: 5rem;
             font-weight: 900;
             letter-spacing: 15px;
             text-transform: uppercase;
@@ -81,7 +80,7 @@
 
         .status-bar {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.65rem; /* ลดขนาดลงเล็กน้อย */
+            font-size: 0.65rem;
             letter-spacing: 10px;
             color: var(--secondary);
             border-top: 1px solid var(--border);
@@ -91,18 +90,18 @@
             display: inline-block;
         }
 
-        /* --- ปรับขนาดป้ายให้ Compact ลง --- */
+        /* --- Compact Plate --- */
         .changretta-plate {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 30px 60px; /* ลด Padding ลงเยอะพอสมควร */
+            padding: 30px 60px;
             text-align: center;
             backdrop-filter: blur(12px);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             position: relative;
             width: auto;
-            min-width: 320px; /* ลด Min-width ลงจาก 450px */
+            min-width: 320px;
         }
 
         .changretta-plate:hover {
@@ -113,7 +112,7 @@
 
         .plate-main-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem; /* ลดขนาดฟอนต์ลง */
+            font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: 10px;
             color: var(--primary);
@@ -123,16 +122,15 @@
 
         .real-member-tag {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem; /* ลดขนาด Tag ลง */
+            font-size: 0.7rem;
             letter-spacing: 6px;
             color: var(--secondary);
             text-transform: uppercase;
         }
 
-        /* ขอบกรอบ 4 ด้าน (ปรับขนาดให้เล็กลงตามป้าย) */
         .corner {
             position: absolute;
-            width: 18px; /* ลดขนาดมุมลง */
+            width: 18px;
             height: 18px;
             border: 2px solid var(--primary);
             filter: drop-shadow(0 0 5px var(--primary));
@@ -206,8 +204,7 @@
 
     <div class="main-container">
         <h1 class="brand-logo-text">CHANGRETTA</h1>
-        
-        <div class="status-bar">ALL PLAYER REAL  CHANGRETTA 2K26</div>
+        <div class="status-bar">ALL PLAYER REAL CHANGRETTA 2K26</div>
 
         <div class="changretta-plate" onclick="window.open('http://member.dedkordongg.xyz/', '_blank')">
             <div class="corner c-tl"></div>
@@ -222,10 +219,10 @@
 
     <div id="music-container">
         <div class="player-bar">
-            <img src="https://i.ytimg.com/vi/P8Am-QTUQes/maxresdefault.jpg" class="album-art" alt="Art">
+            <img src="https://i.ytimg.com/vi/xy3AcmW0lrQ/maxresdefault.jpg" class="album-art" alt="Art">
             <div class="song-info">
-                <h4>End Of Beginning</h4>
-                <p>Djo Music</p>
+                <h4>End of Beginning</h4>
+                <p>Djo // AUDIO_SYSTEM</p>
             </div>
             <button class="btn-toggle" onclick="togglePlayPause()" id="playBtn">||</button>
         </div>
@@ -279,8 +276,12 @@
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('yt-player', {
                 height: '0', width: '0',
-                videoId: 'P8Am-QTUQes',
-                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'P8Am-QTUQes' },
+                videoId: 'xy3AcmW0lrQ', // เปลี่ยน ID เพลงที่นี่
+                playerVars: { 
+                    'autoplay': 1, 
+                    'loop': 1, 
+                    'playlist': 'xy3AcmW0lrQ' // ใส่ ID เพลงเพื่อให้ Loop ได้
+                },
                 events: { 'onReady': (e) => { e.target.setVolume(40); }}
             });
         }
