@@ -72,7 +72,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            /* แสงวิ่งที่ตัวปุ่ม */
             background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
             background-size: 200% auto;
             animation: btnShine 3s linear infinite;
@@ -85,19 +84,17 @@
         .official-btn:hover {
             background-color: rgba(255, 255, 255, 0.15);
             border-color: #fff;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
             transform: scale(1.05);
         }
 
         .btn-dot {
-            width: 6px;
-            height: 6px;
+            width: 6px; height: 6px;
             background: #fff;
             border-radius: 50%;
             box-shadow: 0 0 10px #fff;
         }
 
-        /* --- Header Section --- */
+        /* --- Header Section: ปรับเป็นสีขาว & แสงเทาวิ่ง --- */
         .top-header {
             position: absolute;
             top: 50px;
@@ -116,16 +113,17 @@
             user-select: none;
             display: block;
             position: relative;
-            background: linear-gradient(90deg, #777 0%, #777 35%, #fff 50%, #777 65%, #777 100%);
+            /* ตัวอักษรสีขาวสว่าง (#fff) แสงวิ่งเป็นสีเทาเงินสว่าง (#ccc) */
+            background: linear-gradient(90deg, #ffffff 0%, #ffffff 35%, #cccccc 50%, #ffffff 65%, #ffffff 100%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            animation: whiteGlowRun 2.5s linear infinite;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+            animation: greyShimmerRun 2.5s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
         }
 
-        @keyframes whiteGlowRun {
+        @keyframes greyShimmerRun {
             0% { background-position: 200% center; }
             100% { background-position: -200% center; }
         }
@@ -181,15 +179,16 @@
         }
 
         .discord-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             transform: scale(1.05);
+            border-color: #fff;
         }
 
         .status-dot {
             width: 10px; height: 10px;
             background: #23a55a;
             border-radius: 50%;
-            box-shadow: 0 0 8px #23a55a;
+            box-shadow: 0 0 10px #23a55a;
         }
 
         .discord-icon svg { width: 18px; fill: #5865F2; }
@@ -253,7 +252,7 @@
         .player-bar {
             display: flex;
             align-items: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             border: 1px solid var(--border);
             padding: 10px 20px;
             gap: 15px;
@@ -273,13 +272,12 @@
             cursor: pointer;
         }
 
+        /* --- Footer --- */
         .footer {
             position: absolute;
             bottom: 25px;
             font-size: 0.75rem;
             color: var(--secondary);
-            text-transform: none;
-            letter-spacing: 1px;
         }
 
         .footer a {
