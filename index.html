@@ -53,7 +53,7 @@
             z-index: 1; pointer-events: none; opacity: 0.25;
         }
 
-        /* --- Header Section: White Text with Light Grey Shimmer --- */
+        /* --- Header Section: Winterfell Awake Style with Bright Shimmer --- */
         .top-header {
             position: absolute;
             top: 50px;
@@ -72,14 +72,15 @@
             user-select: none;
             display: block;
             position: relative;
-            /* พื้นตัวอักษรสีขาว (#fff) และแสงวิ่งเป็นสีเทาสว่าง (#bbb) */
-            background: linear-gradient(90deg, #fff 0%, #fff 35%, #bbb 50%, #fff 65%, #fff 100%);
+            /* พื้นตัวอักษรสีขาว แสงวิ่งสีเทาสว่าง */
+            background: linear-gradient(90deg, #ffffff 0%, #ffffff 35%, #bbbbbb 50%, #ffffff 65%, #ffffff 100%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            animation: greyShimmerRun 3s linear infinite;
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+            animation: greyShimmerRun 2.5s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)) 
+                    drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
         }
 
         @keyframes greyShimmerRun {
@@ -100,7 +101,6 @@
             text-transform: uppercase;
         }
 
-        /* ปรับปรุงการจัดวางป้ายให้อยู่กึ่งกลาง */
         .main-container {
             position: absolute;
             top: 50%;
@@ -115,7 +115,7 @@
             margin-top: 60px;
         }
 
-        /* --- Discord Button --- */
+        /* --- Discord Button above Music Player --- */
         .discord-wrapper {
             position: fixed;
             bottom: 110px;
@@ -138,20 +138,20 @@
         }
 
         .discord-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.15);
             transform: scale(1.05);
+            border-color: #fff;
         }
 
         .status-dot {
             width: 10px; height: 10px;
             background: #23a55a;
             border-radius: 50%;
-            box-shadow: 0 0 8px #23a55a;
+            box-shadow: 0 0 10px #23a55a;
         }
 
         .discord-icon svg { width: 18px; fill: #5865F2; }
-
-        .discord-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .discord-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left;}
         .discord-label { font-size: 0.6rem; color: #aaa; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
         .discord-join { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; }
 
@@ -211,7 +211,7 @@
         .player-bar {
             display: flex;
             align-items: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             border: 1px solid var(--border);
             padding: 10px 20px;
             gap: 15px;
@@ -219,8 +219,8 @@
         }
 
         .album-art { width: 40px; height: 40px; filter: grayscale(100%); border: 1px solid var(--secondary); }
-        .song-info h4 { font-size: 0.8rem; color: #fff; }
-        .song-info p { font-size: 0.55rem; color: var(--secondary); }
+        .song-info h4 { font-size: 0.8rem; color: #fff; text-align: left;}
+        .song-info p { font-size: 0.55rem; color: var(--secondary); text-align: left;}
 
         .btn-toggle {
             background: #fff;
@@ -231,12 +231,25 @@
             cursor: pointer;
         }
 
+        /* --- Updated Footer --- */
         .footer {
             position: absolute;
             bottom: 25px;
-            font-size: 0.55rem;
-            letter-spacing: 5px;
+            font-size: 0.75rem;
             color: var(--secondary);
+            text-transform: none;
+            letter-spacing: 1px;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            text-shadow: 0 0 10px #fff;
         }
 
         @media (max-width: 768px) {
@@ -298,7 +311,9 @@
     <div id="yt-player" style="display:none;"></div>
 
     <footer class="footer">
-        © 2026 CHANGRETTA | DESIGNED BY OSHI
+        Designed by <a href="https://discord.gg/oneless" target="_blank">Oneless</a> | 
+        Powered by <a href="https://www.facebook.com/tsumaki.tsunaji.342" target="_blank">OSHI</a> | 
+        © 2026
     </footer>
 
     <script>
