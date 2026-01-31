@@ -53,7 +53,7 @@
             z-index: 1; pointer-events: none; opacity: 0.25;
         }
 
-        /* --- Header Section Style: Winterfell Awake with White Glow Run --- */
+        /* --- Header Section: ปรับความสว่างสูงสุด --- */
         .top-header {
             position: absolute;
             top: 50px;
@@ -72,14 +72,17 @@
             user-select: none;
             display: block;
             position: relative;
-            /* เอฟเฟกต์แสงวิ่งสีขาว */
-            background: linear-gradient(90deg, #555, #fff, #555);
+            /* แสงวิ่งสีขาวที่สว่างขึ้น (เพิ่ม Contrast) */
+            background: linear-gradient(90deg, #333 0%, #fff 45%, #fff 55%, #333 100%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            animation: whiteGlowRun 3s linear infinite;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+            animation: whiteGlowRun 2.5s linear infinite;
+            /* เพิ่มเงาเรืองแสงซ้อนหลายชั้น (Multi-layer Glow) */
+            filter: drop-shadow(0 0 5px #fff) 
+                    drop-shadow(0 0 15px rgba(255, 255, 255, 0.8))
+                    drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
         }
 
         @keyframes whiteGlowRun {
@@ -111,7 +114,7 @@
             margin-top: 220px;
         }
 
-        /* --- Discord Button above Music Bar --- */
+        /* --- Discord Button --- */
         .discord-wrapper {
             position: fixed;
             bottom: 110px;
@@ -136,6 +139,7 @@
         .discord-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: scale(1.05);
+            border-color: #fff;
         }
 
         .status-dot {
